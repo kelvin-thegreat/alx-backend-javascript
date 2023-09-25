@@ -28,6 +28,7 @@ in your project directory, install Jest, Babel and ESList by using the supplied 
 Add the files below to your project directory
 
 1. package.json
+```
 {
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
@@ -47,8 +48,9 @@ Add the files below to your project directory
     "jest": "^24.9.0"
   }
 }
-
-2. babel.config.js
+```
+3. babel.config.js
+```
 module.exports = {
   presets: [
     [
@@ -61,8 +63,9 @@ module.exports = {
     ],
   ],
 };
-
-3. .eslintrc.js
+```
+5. .eslintrc.js
+```
 module.exports = {
   env: {
     browser: false,
@@ -98,5 +101,6 @@ module.exports = {
     }
   ]
 };
+```
 ###  Finally
  run npm install from the terminal of your project folder to install all necessary project dependencies.
