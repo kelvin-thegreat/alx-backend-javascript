@@ -36,12 +36,8 @@ export default class Pricing {
   /**
    * Set the amount of the pricing.
    * @param {number} value - The new amount.
-   * @throws {TypeError} If the value is not a number.
    */
   set amount(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('amount must be a number');
-    }
     this._amount = value;
   }
 
@@ -56,12 +52,8 @@ export default class Pricing {
   /**
    * Set the currency of the pricing.
    * @param {Currency} value - The new currency.
-   * @throws {TypeError} If the value is not an instance of Currency.
    */
   set currency(value) {
-    if (!(value instanceof Currency)) {
-      throw new TypeError('currency must be a Currency');
-    }
     this._currency = value;
   }
 
@@ -70,7 +62,9 @@ export default class Pricing {
    * @returns {string} The full pricing string in the format: "amount currency_name (currency_code)".
    */
   displayFullPrice() {
-    return `${this.amount} ${this.currency.name} (${this.currency.code})`;
+    const currencyName = this._currency.name;
+    const currencyCode = this._currency.code;
+    return `${this._amount} ${currencyName} (${currencyCode})`;
   }
 
   /**
@@ -78,15 +72,8 @@ export default class Pricing {
    * @param {number} amount - The amount to convert.
    * @param {number} conversionRate - The conversion rate.
    * @returns {number} The converted amount.
-   * @throws {TypeError} If amount or conversionRate is not a number.
    */
   static convertPrice(amount, conversionRate) {
-    if (typeof amount !== 'number') {
-      throw new TypeError('amount must be a number');
-    }
-    if (typeof conversionRate !== 'number') {
-      throw new TypeError('conversionRate must be a number');
-    }
     return amount * conversionRate;
   }
 }
