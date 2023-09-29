@@ -1,131 +1,77 @@
 /**
- *  Holberton course.
+ * Represents a Holberton Course.
  */
-export default HolbertonCourse;
-
-/**
- * Represents a Holberton course.
- */
-class HolbertonCourse {
-  /**
-   * Create a new Holberton course.
-   * @param {string} name - The name of the course.
-   * @param {number} length - The length of the course in weeks.
-   * @param {string[]} students - An array of student names enrolled in the course.
-   */
-  constructor(name, length, students) {
+export default class HolbertonCourse {
     /**
-     * The name of the course.
-     * @type {string}
-     * @private
+     * Creates a new HolbertonCourse.
+     *
+     * @param {String} name - Course Name.
+     * @param {Number} length - Course Lenght (in months).
+     * @param {String[]} students - The names of students in the course.
      */
-    this._name = this.validateString(name, 'name');
-
+    constructor(name, length, students) {
+      this.name = name;
+      this.length = length;
+      this.students = students;
+    }
+  
     /**
-     * The length of the course in weeks.
-     * @type {number}
-     * @private
+     * getter
+     * Gets the name of this course.
      */
-    this._length = this.validateNumber(length, 'length');
-
+    get name() {
+      return this._name;
+    }
+  
     /**
-     * An array of student names enrolled in the course.
-     * @type {string[]}
-     * @private
+     * length setter
+     * Sets the name of this course.
      */
-    this._students = this.validateStudents(students, 'students');
-  }
-
-  /**
-   * Get the name of the course.
-   * @returns {string} The name of the course.
-   */
-  get name() {
-    return this._name;
-  }
-
-  /**
-   * Set the name of the course.
-   * @param {string} newName - The new name of the course.
-   */
-  set name(newName) {
-    this._name = this.validateString(newName, 'name');
-  }
-
-  /**
-   * Get the length of the course in weeks.
-   * @returns {number} The length of the course.
-   */
-  get length() {
-    return this._length;
-  }
-
-  /**
-   * Set the length of the course in weeks.
-   * @param {number} newLength - The new length of the course.
-   */
-  set length(newLength) {
-    this._length = this.validateNumber(newLength, 'length');
-  }
-
-  /**
-   * Get the array of student names enrolled in the course.
-   * @returns {string[]} An array of student names.
-   */
-  get students() {
-    return this._students;
-  }
-
-  /**
-   * Set the array of student names enrolled in the course.
-   * @param {string[]} newStudents - An array of new student names.
-   */
-  set students(newStudents) {
-    this._students = this.validateStudents(newStudents, 'students');
-  }
-
-  /**
-   * Validate that a value is a string.
-   * @param {string} value - The value to validate.
-   * @param {string} attributeName - The name of the attribute being validated.
-   * @returns {string} The validated string.
-   * @throws {TypeError} If the value is not a string.
-   * @private
-   */
-  validateString(value, attributeName) {
-    if (typeof value !== 'string') {
-      throw new TypeError(`${attributeName} must be a string`);
+    set name(value) {
+      if (typeof value !== 'string') {
+        throw new TypeError('Name must be a string');
+      }
+      this._name = value;
     }
-    return value;
-  }
-
-  /**
-   * Validate that a value is a number and not NaN.
-   * @param {number} value - The value to validate.
-   * @param {string} attributeName - The name of the attribute being validated.
-   * @returns {number} The validated number.
-   * @throws {TypeError} If the value is not a valid number.
-   * @private
-   */
-  validateNumber(value, attributeName) {
-    if (typeof value !== 'number' || isNaN(value)) {
-      throw new TypeError(`${attributeName} must be a number`);
+  
+    /**
+     * length getter
+     * Gets the length of this course (in months).
+     */
+    get length() {
+      return this._length;
     }
-    return value;
-  }
-
-  /**
-   * Validate that an array contains only string elements.
-   * @param {string[]} value - The array to validate.
-   * @param {string} attributeName - The name of the attribute being validated.
-   * @returns {string[]} The validated array of strings.
-   * @throws {TypeError} If the array contains non-string elements.
-   * @private
-   */
-  validateStudents(value, attributeName) {
-    if (!Array.isArray(value) || !value.every(item => typeof item === 'string')) {
-      throw new TypeError(`${attributeName} must be an array of strings`);
+  
+    /**
+     * Lenght Setter
+     * Sets the length of this course (in months).
+     */
+    set length(value) {
+      if (typeof value !== 'number') {
+        throw new TypeError('Length must be a number');
+      }
+      this._length = value;
     }
-    return value;
+  
+    /**
+     * Lenght getter
+     * Gets the names of students in this course.
+     */
+    get students() {
+      return this._students;
+    }
+  
+    /**
+     * setters
+     * Sets the names of students in this course.
+     */
+    set students(value) {
+      if (!(value instanceof Array)) {
+        throw new TypeError('Students must be an array of strings');
+      }
+      if (!value.every((student) => typeof student === 'string')) {
+        throw new TypeError('Students must be an array of strings');
+      }
+      this._students = value;
+    }
   }
-}
