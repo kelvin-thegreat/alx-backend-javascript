@@ -1,5 +1,5 @@
 /**
- * Class representing a building with square footage.
+ * Class  building with square footage.
  */
 export default class Building {
     constructor(sqft) {
