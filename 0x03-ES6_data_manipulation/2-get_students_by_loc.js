@@ -5,8 +5,9 @@
  * @param {string} city - The city to filter students by.
  * @returns {Array} - An array of student objects located in the specified city.
  */
-function getStudentsByLocation(studentsArray, city) {
-  return studentsArray.filter(student => student.location === city);
-}
-
-export default getStudentsByLocation;
+export default function getStudentsByLocation(students, city) {
+    if (students instanceof Array) {
+      return students.filter((student) => student.location === city);
+    }
+    return [];
+  }
