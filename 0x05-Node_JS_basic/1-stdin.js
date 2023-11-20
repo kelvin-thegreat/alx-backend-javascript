@@ -10,10 +10,10 @@ When the user ends the program, it displays "This important software is now clos
 process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
 process.stdin.on('readable', () => {
-  chunk = process.stdin.read();
+  read_name = process.stdin.read();
 
-  if (chunk) {
-    process.stdout.write(`Your name is: ${chunk}`);
+  if (read_name) {
+    process.stdout.write(`Your name is: ${read_name}`);
   }
 });
 
