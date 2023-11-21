@@ -1,19 +1,21 @@
+/* eslint-disable jest/require-hook */
 const http = require('http');
 
-// Create a simple HTTP server
+// eslint-disable-next-line linebreak-style
+// Create simple HTTP server
 const app = http.createServer((req, res) => {
-  // Set the content type to plain text
+  // Set content type to plain text
   res.setHeader('Content-Type', 'text/plain');
 
   // Send "Hello Holberton School!" as the response
   res.end('Hello Holberton School!\n');
 });
 
-// Set the server to listen on port 1245
+// Set server to listen port 1245
 const PORT = 1245;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Export the app variable
+// Export app
 module.exports = app;
