@@ -2,7 +2,7 @@
 const express = require('express');
 
 const app = express();
-const PORT = 7865;
+const PORT_NUMBER = 7865;
 
 app.use(express.json());
 app.get('/', (_req, res) => {
@@ -32,8 +32,8 @@ app.post('/login', (req, res) => {
   res.send(`Welcome ${username}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`API available on localhost port ${PORT}`);
+app.listen(PORT_NUMBER, () => {
+  console.log(`API available on localhost port ${PORT_NUMBER}`);
 });
 
 module.exports = app;
