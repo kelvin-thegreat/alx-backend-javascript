@@ -1,63 +1,34 @@
-// api.test.js
+// Testing API script
 const request = require('request');
 const { expect } = require('chai');
-const app = require('./api');
 
-describe('Index page', () => {
-  let server;
+describe('API integration test', () => {
+  const API_URL = 'http://localhost:7865';
 
-  before((done) => {
-    server = app.listen(7865, () => {
+  it('GET / returns correct response', (done) => {
+    request.get(`${API_URL}/`, (_err, res, body) => {
+      expect(res.statusCode).to.be.equal(200);
+      expect(body).to.be.equal('Welcome to the payment system');
       done();
     });
   });
-
-  after(() => {
-    server.close();
-  });
-
-  it('should return correct status code for /', (done) => {
-    request.get('http://localhost:7865/', (error, response) => {
-      expect(response.statusCode).to.equal(200);
+  it('GET /cart/:id returns correct response for valid :id', (done) => {
+    request.get(`${API_URL}/cart/47`, (_err, res, body) => {
+      expect(res.statusCode).to.be.equal(200);
+      expect(body).to.be.equal('Payment methods for cart 47');
       done();
     });
   });
-
-  it('should return correct result for /', (done) => {
-    request.get('http://localhost:7865/', (error, response, body) => {
-      expect(body).to.equal('Welcome to the payment system');
+  it('GET /cart/:id returns 404 response for negative number values in :id', (done) => {
+    request.get(`${API_URL}/cart/-47`, (_err, res, _body) => {
+      expect(res.statusCode).to.be.equal(404);
       done();
     });
   });
-
-  it('should handle other cases for /', (done) => {
-    // Additional test cases for / if needed
-    done();
-  });
-
-  // New test suite for /cart/:id
-  describe('Cart page', () => {
-    it('should return correct status code when :id is a number', (done) => {
-      request.get('http://localhost:7865/cart/123', (error, response) => {
-        expect(response.statusCode).to.equal(200);
-        done();
-      });
+  it('GET /cart/:id returns 404 response for non-numeric values in :id', (done) => {
+    request.get(`${API_URL}/cart/d200-44a5-9de6`, (_err, res, _body) => {
+      expect(res.statusCode).to.be.equal(404);
+      done();
     });
-
-    it('should return correct result when :id is a number', (done) => {
-      request.get('http://localhost:7865/cart/123', (error, response, body) => {
-        expect(body).to.equal('Payment methods for cart 123');
-        done();
-      });
-    });
-
-    it('should return 404 when :id is NOT a number', (done) => {
-      request.get('http://localhost:7865/cart/notanumber', (error, response) => {
-        expect(response.statusCode).to.equal(404);
-        done();
-      });
-    });
-
-    // Additional test cases for /cart/:id if needed
   });
 });
