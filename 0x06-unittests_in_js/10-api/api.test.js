@@ -55,22 +55,14 @@ describe('API integration test', () => {
     // Additional test cases for /login if needed
   });
 
-  // New test suite for /available_payments endpoint
-  describe('Available Payments endpoint', () => {
-    it('GET /available_payments returns correct response', (done) => {
-      request.get(`${API_URL}/available_payments`, (_err, res, body) => {
-        const expected = {
-          payment_methods: {
-            credit_cards: true,
-            paypal: false,
-          },
-        };
-        expect(res.statusCode).to.be.equal(200);
-        expect(JSON.parse(body)).to.deep.equal(expected);
-        done();
-      });
-    });
 
-    // Additional test cases for /available_payments if needed
+  // Test cases for available _Payments
+  it('GET /available_payments returns valid response', (done) => {
+    request.get(`${API_URL}/available_payments`, (_err, res, body) => {
+      expect(res.statusCode).to.be.equal(200);
+      expect(JSON.parse(body))
+        .to.be.deep.equal({payment_methods: {credit_cards: true, paypal: false}});
+      done();
+    });
   });
 });
